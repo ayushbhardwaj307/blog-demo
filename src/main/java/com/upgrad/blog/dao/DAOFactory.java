@@ -10,22 +10,11 @@ import com.upgrad.blog.interfaces.UserCRUD;
  * of this method should be UserCRUD)
  */
 public class DAOFactory {
-    private PostsCRUD postsCRUD;
-    private UserCRUD userCRUD;
-
-    public DAOFactory(UserCRUD userCRUD) {
-        this.userCRUD = userCRUD;
+    public PostsCRUD getPostCRUDS() {
+        return new PostDAO();
     }
-
-
-
-    public DAOFactory(PostsCRUD postsCRUD) {
-        this.postsCRUD = postsCRUD;
+    public UserCRUD getUserCRUDS() {
+        return new UserDAO();
     }
-
-    public PostsCRUD getPostsCRUDS() {
-        return postsCRUD;
-    }
-    public UserCRUD getUserCRUDS(){return userCRUD; }
 
 }

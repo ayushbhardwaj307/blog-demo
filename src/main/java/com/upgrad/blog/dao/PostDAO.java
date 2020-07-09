@@ -73,13 +73,13 @@ public class PostDAO implements PostsCRUD {
         java.sql.Date date = java.sql.Date.valueOf(postDTO.getTimestamp().toLocalDate());
         java.sql.Time time = java.sql.Time.valueOf(postDTO.getTimestamp().toLocalTime());
         Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement st = conn.prepareStatement("INSERT INTO user(id, email_id, title,) VALUES (?, ?, ?, ?, ?, ?);");
+        PreparedStatement st = conn.prepareStatement("INSERT INTO user(id, email_id, title, description, tag, timestamp) VALUES (?, ?, ?, ?, ?, ?);");
         st.setInt(1, postDTO.getPostId());
         st.setString(2,postDTO.getEmailId());
         st.setString(3,postDTO.getTitle());
         st.setString(4,postDTO.getDescription());
         st.setString(5,postDTO.getTag());
-        st.setTime(6,time);
+        st.setString(6,postDTO.getTimestamp().toString());
         st.execute();
         return postDTO;
     }

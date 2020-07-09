@@ -12,11 +12,10 @@
      */
 
     try{
-        if (session.getAttribute("uemailId").equals(request.getParameter("emailId"))){
-            response.sendRedirect("/Home.jsp");
+        if (session.getAttribute("emailId") != null) {
+            response.sendRedirect(request.getContextPath() + "/Home.jsp");
         }
-    }catch(Exception ignored){
-
+    } catch (NullPointerException e) {
     }
 
 %>
@@ -55,7 +54,6 @@ the UserServlet gets invoked based on the URL mapping mentioned in the Deploymen
                 <%
                 }
             } catch (NullPointerException ignored) {
-
             }
 			%>
 

@@ -65,11 +65,8 @@ import java.sql.SQLException;
 public class UserServlet extends HttpServlet {
 
 
-    private DAOFactory daoFactory;
-
-    public UserServlet(DAOFactory daoFactory) {
-        this.daoFactory = daoFactory;
-    }
+    EmailValidator emailValidator = new EmailValidator();
+    DAOFactory daoFactory = new DAOFactory();
 
     /**
      *
@@ -91,70 +88,83 @@ public class UserServlet extends HttpServlet {
         RequestDispatcher rd;
         EmailValidator em = new EmailValidator();
         try {
-            em.isValidEmail(emailId);
-        } catch (EmailNotValidException ex) {
-            req.setAttribute("isError", true);
-            req.setAttribute("errorMessage", ex.getMessage());
-            rd = req.getRequestDispatcher("/index.jsp");
-            rd.forward(req, resp);
+            if (httpSession.getAttribute("emailId") != null) {
+                resp.sendRedirect(req.getContextPath() + "/Home.jsp");
+            }
+        } catch (NullPointerException e) {
         }
 
         try {
 
-            UserDTO userDTO2 = daoFactory.getUserCRUDS().findByEmail(emailId);
+            if (emailValidator.isValidEmail(emailId)) {
+                if (password.equals("")) {
+                    req.setAttribute("isError", true);
+                    req.setAttribute("errorMessage", "Password is a required field");
+                    rd = req.getRequestDispatcher("/index.jsp");
+                    rd.forward(req, resp);
+                }
+                if (actionType.equals("") || !(actionType.toUpperCase().equals("SIGN IN") || actionType.toUpperCase().equals("SIGN UP"))) {
+                    req.setAttribute("isError", true);
+                    req.setAttribute("errorMessage", "action type is a required field and the values can be \"Sign In\" or \"Sign Up\"");
+                    rd = req.getRequestDispatcher("/index.jsp");
+                    rd.forward(req, resp);
+                }
+                if (actionType.toUpperCase().equals("SIGN IN")) {
+                    try {
+                        userDTO = daoFactory.getUserCRUDS().findByEmail(emailId);
+                        if (userDTO.getEmailId() == null) {
+                            req.setAttribute("isError", true);
+                            req.setAttribute("errorMessage", "No user registered with the given email address!");
+                            rd = req.getRequestDispatcher("/index.jsp");
+                            rd.forward(req, resp);
+                        }
+                        else if (userDTO.getPassword().equals(password)) {
+                            httpSession.setAttribute("emailId", emailId);
+                            resp.sendRedirect(req.getContextPath() + "/Home.jsp");
+                        } else {
+                            req.setAttribute("isError", true);
+                            req.setAttribute("errorMessage", "Please enter valid credentials");
+                            rd = req.getRequestDispatcher("/index.jsp");
+                            rd.forward(req, resp);
+                        }
+                    } catch (SQLException e) {
+                        req.setAttribute("isError", true);
+                        req.setAttribute("errorMessage", "Some unexpected error occured!");
+                        rd = req.getRequestDispatcher("/index.jsp");
+                        rd.forward(req, resp);
+                    }
 
-            if (userDTO2.getEmailId() != null) {
-                // User already exist, set error and send back
-                req.setAttribute("isError", true);
-                req.setAttribute("errorMessage", "A user with this email address already exists!");
-                rd = req.getRequestDispatcher("/index.jsp");
-                rd.forward(req, resp);
+                } else {
+                    userDTO = new UserDTO();
+                    userDTO.setEmailId(emailId);
+                    userDTO.setPassword(password);
+                    try {
+                        UserDTO userDTO2 = daoFactory.getUserCRUDS().findByEmail(emailId);
+
+                        if (userDTO2.getEmailId() != null) {
+                            req.setAttribute("isError", true);
+                            req.setAttribute("errorMessage", "A user with this email address already exists!");
+                            rd = req.getRequestDispatcher("/index.jsp");
+                            rd.forward(req, resp);
+                        }
+                        else {
+                            daoFactory.getUserCRUDS().create(userDTO);
+                            httpSession.setAttribute("emailId", emailId);
+                            resp.sendRedirect(req.getContextPath() + "/Home.jsp");
+                        }
+                    } catch (SQLException e) {
+                        req.setAttribute("isError", true);
+                        req.setAttribute("errorMessage", "Some unexpected error occured!");
+                        rd = req.getRequestDispatcher("/index.jsp");
+                        rd.forward(req, resp);
+                    }
+                }
             }
-            // Set session to identify user is loggedin
-            else {
-                daoFactory.getUserCRUDS().create(userDTO);
-                httpSession.setAttribute("uemailId", emailId);
-                resp.sendRedirect(req.getContextPath() + "/Home.jsp");
-            }
-        } catch (SQLException e) {
+        } catch (EmailNotValidException e) {
             req.setAttribute("isError", true);
-            req.setAttribute("errorMessage", "Some unexpected error occured!");
+            req.setAttribute("errorMessage", e.getMessage());
             rd = req.getRequestDispatcher("/index.jsp");
             rd.forward(req, resp);
-        }
-        if (actionType.toUpperCase().equals("SIGN IN")) {
-            try {
-                if (userDTO.getEmailId() == null) {
-                    req.setAttribute("isError", true);
-                    req.setAttribute("errorMessage", "No user registered with the given email address!");
-                    rd = req.getRequestDispatcher("/index.jsp");
-                    rd.forward(req, resp);
-                } else if (userDTO.getPassword().equals(password)) {
-                    // Set session variable to check if user is loggedin
-                    httpSession.setAttribute("uemailId", emailId);
-                    resp.sendRedirect(req.getContextPath() + "/Home.jsp");
-                } else {
-                    req.setAttribute("isError", true);
-                    req.setAttribute("errorMessage", "Please enter valid credentials");
-                    rd = req.getRequestDispatcher("/index.jsp");
-                    rd.forward(req, resp);
-                }
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
-//            } catch (SQLException e) {
-//                req.setAttribute("isError", true);
-//                req.setAttribute("errorMessage", "Some unexpected error occured!");
-//                rd = req.getRequestDispatcher("/index.jsp");
-//                rd.forward(req, resp);
-//            }
-            try {
-                if (httpSession.getAttribute("uemailId") != null) {
-                    resp.sendRedirect(req.getContextPath() + "/Home.jsp");
-                }
-            } catch (NullPointerException e) {
-                // Means user is not Signed in and can access the servlet
-            }
         }
     }
 }
