@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="828dd186-a3d0-428a-bd12-3d7b419c5280" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/util/EmailValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/util/EmailValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/dao/PostDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/dao/PostDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/util/DateTimeFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/util/DateTimeFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog/Delete.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/blog/Delete.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog/Search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/blog/Search.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1593271437669</updated>
       <workItem from="1593271439029" duration="831000" />
-      <workItem from="1594276162832" duration="1043000" />
+      <workItem from="1594276162832" duration="1744000" />
     </task>
     <servers />
   </component>

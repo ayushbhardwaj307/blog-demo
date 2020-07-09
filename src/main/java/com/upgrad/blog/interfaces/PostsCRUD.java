@@ -1,6 +1,7 @@
 package com.upgrad.blog.interfaces;
 
 import com.upgrad.blog.dto.PostDTO;
+import com.upgrad.blog.dto.UserDTO;
 
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -22,7 +23,9 @@ public interface PostsCRUD {
      * @return
      * @throws SQLException
      */
-    public PostDTO create(PostDTO postDTO) throws SQLException;
+
+
+    PostDTO create(PostDTO postDTO) throws SQLException;
 
     /**
      *

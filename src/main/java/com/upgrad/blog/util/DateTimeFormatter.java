@@ -1,6 +1,7 @@
 //**************************DONE***************************
 package com.upgrad.blog.util;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 /**
@@ -10,5 +11,12 @@ import java.time.LocalDateTime;
  */
 
 public class DateTimeFormatter {
+    public static  String format(LocalDateTime localDateTime){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        sdf.format(localDateTime);
+        String time=sdf.toString();
+        return time;
+    }
+
 
 }

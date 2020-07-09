@@ -46,7 +46,6 @@ import java.util.List;
  * in the database.
  */
 public class PostDAO implements PostsCRUD {
-
     @Override
     public List<PostDTO> findByEmail(String emailId) throws SQLException {
         DatabaseConnection.getInstance();
