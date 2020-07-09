@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="828dd186-a3d0-428a-bd12-3d7b419c5280" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/dao/PostDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/dao/PostDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/util/DateTimeFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/util/DateTimeFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog/Delete.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/blog/Delete.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog/Search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/blog/Search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/util/LogWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/util/LogWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +24,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="D:/blog-demo" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
@@ -69,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1593271437669</updated>
       <workItem from="1593271439029" duration="831000" />
-      <workItem from="1594276162832" duration="1744000" />
+      <workItem from="1594276162832" duration="2257000" />
     </task>
     <servers />
   </component>
@@ -81,10 +79,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1593271674995" />
-    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1593271539602">
+    <state x="548" y="167" key="FileChooserDialogImpl" timestamp="1594278310558">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1593271539602" />
+    <state x="548" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1594278310558" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1593272270486">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -101,5 +99,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593272270485" />
+    <state x="209" y="108" key="new project wizard" timestamp="1594278289497">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="108" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1594278289497" />
   </component>
 </project>
