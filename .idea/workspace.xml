@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="828dd186-a3d0-428a-bd12-3d7b419c5280" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/exceptions/EmailNotValidException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/exceptions/EmailNotValidException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/exceptions/PostNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/exceptions/PostNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/servlets/PostServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/servlets/PostServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/servlets/UserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/upgrad/blog/servlets/UserServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1593271437669</updated>
       <workItem from="1593271439029" duration="831000" />
-      <workItem from="1594276162832" duration="553000" />
+      <workItem from="1594276162832" duration="801000" />
     </task>
     <servers />
   </component>

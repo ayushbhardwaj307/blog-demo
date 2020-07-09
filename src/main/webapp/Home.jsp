@@ -8,11 +8,17 @@
     response.setDateHeader ("Expires", 0);
 
     /**
-	* TODO: 4.13. Check if user is logged in or not. if not then redirect user to default page i.e index.jsp.
-	* (Hint: You need to handle NullPointerException.)
-	* (Hint: Make use of the email id stored in the session object to check if user is logged in or not.)
-    */
+     * TODO: 4.13. Check if user is logged in or not. if not then redirect user to default page i.e index.jsp.
+     * (Hint: You need to handle NullPointerException.)
+     * (Hint: Make use of the email id stored in the session object to check if user is logged in or not.)
+     */
+    try{
+        if (!session.getAttribute("uemailId").equals(request.getParameter("emailId"))){
+            response.sendRedirect("/index.jsp");
+        }
+    }catch(Exception ignored){
 
+    }
 %>
 <html>
 <head>
@@ -21,12 +27,24 @@
 </head>
 <body>
 <header class="header">
-<%--    Showing text before @ in email as username--%>
-	<!--
-		TODO: 4.14. If user is logged in then display the string before @ in the user's email id
-		on this web page. For example, if email id is example@gmail.com, then display "Logged In as example"
-		in the top right corner of the web page. 
-	-->
+    <%   String email= (String) session.getAttribute("uemailId");
+        String[] empdata =email.split("@");
+        String username=empdata[0].trim();
+    %>
+    <%
+        try{
+            if (!session.getAttribute("uemailId").equals(request.getParameter("emailId"))){
+                out.println("Logged In as" + username);
+            }
+        }catch(Exception ignored){
+
+        }
+    %>
+    <!--
+        TODO: 4.14. If user is logged in then display the string before @ in the user's email id
+        on this web page. For example, if email id is example@gmail.com, then display "Logged In as example"
+        in the top right corner of the web page.
+    -->
 
 </header>
 <a href="blog/CreatePost.jsp"> Create Post</a>

@@ -1,9 +1,19 @@
 package com.upgrad.blog.servlets;
 
+//import com.sun.java.util.jar.pack.ClassReader;
+
+import com.upgrad.blog.dao.DAOFactory;
+import com.upgrad.blog.dto.PostDTO;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * TODO 4.18: Modify the class definition to make it a Servlet class.
@@ -52,8 +62,13 @@ import java.io.IOException;
  * thread1: Saving data into the database
  * thread2: Writing logs into the file
  */
+@WebServlet("/blog/post")
+public class PostServlet extends HttpServlet {
+    private DAOFactory daoFactory;
 
-public class PostServlet {
+    public PostServlet(DAOFactory daoFactory) {
+        this.daoFactory = daoFactory;
+    }
     //    Here we will have servlet methods
 
     /**
@@ -63,15 +78,46 @@ public class PostServlet {
      * @throws ServletException
      * @throws IOException
      */
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 //        Uncomment the following code snippet to check whether any of the field is empty.
-//        if (email.equals(null) || title.equals(null) || tag.equals(null) || description.equals(null)) {
-//            req.setAttribute("isError", true);
-//            req.setAttribute("errorMessage", "All form fields value are required!");
-//            rd = req.getRequestDispatcher("/blog/CreatePost.jsp"); //rd is RequestDispatcher
-//            rd.forward(req, resp); //rd is RequestDispatcher
-//        }
+
+        String email=req.getParameter("emailId");
+        String title=req.getParameter("title");
+        String tag=req.getParameter("tag");
+        String description=req.getParameter("description");
+        HttpSession httpSession = req.getSession();
+        try {
+            if (httpSession.getAttribute("uemailId") != null) {
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            }
+        } catch (NullPointerException e) {
+            // Means user is not Signed in and can access the servlet
+        }
+        if (email == null || title == null || tag == null || description == null) {
+            req.setAttribute("isError", true);
+            req.setAttribute("errorMessage", "All form fields value are required!");
+            RequestDispatcher rd = req.getRequestDispatcher("/blog/CreatePost.jsp"); //rd is RequestDispatcher
+            rd.forward(req, resp); //rd is RequestDispatcher
+        }
+        RequestDispatcher rd;
+        try {
+
+            PostDTO PostDTO2 = (PostDTO) daoFactory.getPostsCRUDS().findByEmail(email);
+
+            if (PostDTO2.getEmailId() != null) {
+                rd = req.getRequestDispatcher("/ViewPostById.jsp");
+                rd.forward(req, resp);
+            }
+        } catch (SQLException e) {
+            req.setAttribute("isError", true);
+            req.setAttribute("errorMessage", "Some unexpected error occured!");
+            rd = req.getRequestDispatcher("/index.jsp");
+            rd.forward(req, resp);
+        }
+
+
 
     }
 }
