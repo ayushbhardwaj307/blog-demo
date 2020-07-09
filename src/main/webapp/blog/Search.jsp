@@ -6,6 +6,7 @@
 <%@ page import="com.upgrad.blog.dto.PostDTO" %>
 <%@ page import="com.upgrad.blog.util.DateTimeFormatter" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     /*If user tries to click on browser bac k button then he/ she should not be able to access this page*/
@@ -79,18 +80,21 @@
                 List<PostDTO> postDTOS = null;
                 if (request.getMethod().equals("POST")) {
 
-                    try {//uncomment this line
-                        postDTOS.add(request.getMethod());
-                        /*
-                         * Add the missing line of code here
-                         */
-
-                    } catch (PostNotFoundException e) {//uncomment this line
+                    try {
+                        try {
+                            postDTOS = new DAOFactory().getPostCRUDS().findByEmail(request.getParameter("emailId"));
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        if (postDTOS.size() < 1) {
+                            throw new PostNotFoundException("Sorry no posts exists for this email id");
+                        }
+                    } catch (PostNotFoundException e) {
             %>
-            <!--<div class="error"><%=e.getMessage()%>//uncomment this line-->
-            <!--</div>//uncomment this line-->
+            <div class="error"><%=e.getMessage()%>
+            </div>
             <%
-                } //}//uncomment the second brances
+                    } }
             %>
         </div>
     </form>

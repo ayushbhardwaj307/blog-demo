@@ -7,5 +7,6 @@ Sign In/ Sign Up page.
 -->
 <%
 	session.invalidate();
+	response.sendRedirect(request.getContextPath());
 %>
 
